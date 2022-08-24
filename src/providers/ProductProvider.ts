@@ -1,15 +1,16 @@
 import products from '../mocks/products.json';
+import { Product, Products } from '@types/product';
 class ProductProvider {
   constructor() {
   }
-  async getAllProducts () {
+  async getAllProducts (): Promise<Products> {
     const productList = await products;
     if (!productList) {
       throw new Error('ProductList not found');
     }
     return productList;
   }
-  async getProductById (id: string) {
+  async getProductById (id: string): Promise<Product> {
     const product = products.find(
       (item) => item.id === id
     );
