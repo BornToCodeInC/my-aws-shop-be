@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@functions/*": ["./src/functions/*"],
+      "@handlers/*": ["./src/handlers/*"],
+      "@providers/*": ["./src/providers/*"],
+      "@types/*": ["./src/types/*"],
+      "@libs/*": ["./src/libs/*"]
+    }
+  }
+}
