@@ -19,15 +19,32 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      TABLE_NAME: '${self:custom.tableName}'
     },
     iam: {
-      role: 'arn:aws:iam::398158581759:role/BasicLambdaExecutionRole'
-    }
+      role: {
+        statements: [{
+          Effect: 'Allow',
+          Action: [
+            'dynamodb:DescribeTable',
+            'dynamodb:Query',
+            'dynamodb:Scan',
+            'dynamodb:GetItem',
+            'dynamodb:PutItem',
+            'dynamodb:UpdateItem',
+            'dynamodb:DeleteItem',
+          ],
+          Resource: '*',
+        }],
+        permissionsBoundary: 'arn:aws:iam::398158581759:policy/eo_role_boundary',
+      },
+    },
   },
   // import the function via paths
   functions: { getProductById, getProductList },
   package: { individually: true },
   custom: {
+    tableName: 'products-table-viktoryia-yalavaya',
     esbuild: {
       bundle: true,
       minify: false,
@@ -46,6 +63,28 @@ const serverlessConfiguration: AWS = {
       includeModules: true,
     },
   },
+  resources: {
+    Resources: {
+      productsTable: {
+        Type: 'AWS::DynamoDB::Table',
+        Properties: {
+          TableName: '${self:custom.tableName}',
+          AttributeDefinitions: [{
+            AttributeName: 'id',
+            AttributeType: 'S',
+          }],
+          KeySchema: [{
+            AttributeName: 'id',
+            KeyType: 'HASH',
+          }],
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          }
+        }
+      }
+    }
+  }
 };
 
 module.exports = serverlessConfiguration;

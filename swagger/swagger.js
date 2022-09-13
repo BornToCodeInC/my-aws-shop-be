@@ -80,14 +80,6 @@
         "category": {
           "title": "Product.category",
           "type": "string"
-        },
-        "image": {
-          "title": "Product.image",
-          "type": "string"
-        },
-        "rating": {
-          "$ref": "#/definitions/Rating",
-          "title": "Product.rating"
         }
       },
       "required": [
@@ -95,9 +87,7 @@
         "title",
         "price",
         "description",
-        "category",
-        "image",
-        "rating"
+        "category"
       ],
       "additionalProperties": false,
       "title": "Product",
@@ -110,25 +100,6 @@
       },
       "title": "Products.[]",
       "type": "array"
-    },
-    "Rating": {
-      "properties": {
-        "rate": {
-          "title": "Rating.rate",
-          "type": "number"
-        },
-        "count": {
-          "title": "Rating.count",
-          "type": "number"
-        }
-      },
-      "required": [
-        "rate",
-        "count"
-      ],
-      "additionalProperties": false,
-      "title": "Rating",
-      "type": "object"
     }
   },
   "securityDefinitions": {}
