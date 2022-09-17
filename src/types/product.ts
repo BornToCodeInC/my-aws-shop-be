@@ -2,8 +2,8 @@ export interface Product {
   id: string;
   title: string;
   price: number;
+  count: number;
   description: string;
-  category: string;
 }
 
 export type Products = Product[];

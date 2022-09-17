@@ -15,22 +15,25 @@ class ProductProvider {
     return Items;
   }
   async getProductById (id: string): Promise<DynamoDB.DocumentClient.AttributeMap> {
-    const params: DynamoDB.Types.GetItemInput = {
+    const params = {
       TableName: this.table,
-      Key: { id: { S: id }},
+      KeyConditionExpression: 'id = :id',
+      ExpressionAttributeValues: {':id': id},
     };
-    const {Item = null} = await this.db.get(params).promise();
-    if (!Item) {
+    const {Items = []} = await this.db.query(params).promise();
+    if (!Items.length) {
       throw new Error('Product not found');
     }
-    return Item;
+    return Items[0];
   }
   async addProduct (product: Product): Promise<Product> {
-    const params: DynamoDB.Types.PutItemInput = {
+    console.log('Product to add: ', product);
+    const params = {
       TableName: this.table,
-      Item: DynamoDB.Converter.marshall(product),
+      Item: product,
       ConditionExpression: 'attribute_not_exists(id)',
     };
+    console.log('Product: ', params.Item);
     await this.db.put(params).promise();
 
     return product;

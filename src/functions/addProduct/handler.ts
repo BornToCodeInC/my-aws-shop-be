@@ -8,9 +8,10 @@ import { Product } from '@types/product';
 
 const handler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   try {
-    const { title = '', description = '', price = 0 } = event.body as unknown as Partial<Product>;
+    console.log('Add Product Lambda: Incoming Event: ', JSON.stringify(event));
+    const { title = '', description = '', price = 0, count = 0} = event.body as unknown as Partial<Product>;
     const id = uuidv4();
-    const product = await productProvider.addProduct({id, title, description, price} as Product);
+    const product = await productProvider.addProduct({id, title, description, price, count} as Product);
     return formatJSONResponse(product, 201);
   } catch (err) {
     console.log(err);
