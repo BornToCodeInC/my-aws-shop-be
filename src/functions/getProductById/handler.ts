@@ -6,6 +6,7 @@ import schema from '@functions/getProductById/schema';
 
 const handler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   try {
+    console.log('Get Product By Id: Incoming Event: ', JSON.stringify(event));
     const { id } = event.pathParameters;
     const product = await productProvider.getProductById(id);
     return formatJSONResponse(product);

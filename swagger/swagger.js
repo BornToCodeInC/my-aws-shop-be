@@ -6,6 +6,48 @@
     "version": "1"
   },
   "paths": {
+    "/products": {
+      "post": {
+        "summary": "addProduct",
+        "description": "",
+        "operationId": "addProduct.post./products",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful API Response",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "getProductList",
+        "description": "",
+        "operationId": "getProductList.get.products",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful API Response",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        }
+      }
+    },
     "/products/{id}": {
       "get": {
         "summary": "getProductById",
@@ -34,28 +76,6 @@
           }
         }
       }
-    },
-    "/products": {
-      "get": {
-        "summary": "getProductList",
-        "description": "",
-        "operationId": "getProductList.get.products",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "successful API Response",
-            "schema": {
-              "$ref": "#/definitions/Products"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -73,31 +93,21 @@
           "title": "Product.price",
           "type": "number"
         },
+        "count": {
+          "title": "Product.count",
+          "type": "number"
+        },
         "description": {
           "title": "Product.description",
           "type": "string"
-        },
-        "category": {
-          "title": "Product.category",
-          "type": "string"
-        },
-        "image": {
-          "title": "Product.image",
-          "type": "string"
-        },
-        "rating": {
-          "$ref": "#/definitions/Rating",
-          "title": "Product.rating"
         }
       },
       "required": [
         "id",
         "title",
         "price",
-        "description",
-        "category",
-        "image",
-        "rating"
+        "count",
+        "description"
       ],
       "additionalProperties": false,
       "title": "Product",
@@ -110,25 +120,6 @@
       },
       "title": "Products.[]",
       "type": "array"
-    },
-    "Rating": {
-      "properties": {
-        "rate": {
-          "title": "Rating.rate",
-          "type": "number"
-        },
-        "count": {
-          "title": "Rating.count",
-          "type": "number"
-        }
-      },
-      "required": [
-        "rate",
-        "count"
-      ],
-      "additionalProperties": false,
-      "title": "Rating",
-      "type": "object"
     }
   },
   "securityDefinitions": {}
