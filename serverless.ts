@@ -56,7 +56,7 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
     autoswagger: {
-      typefiles: ['./src/types/product.ts']
+      typefiles: ['./src/sharedTypes/product.ts']
     },
     webpack: {
       webpackConfig: './webpack.config.js',

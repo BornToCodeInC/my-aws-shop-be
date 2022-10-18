@@ -4,8 +4,9 @@
     "paths": {
       "@functions/*": ["./src/functions/*"],
       "@handlers/*": ["./src/handlers/*"],
+      "@helpers/*": ["./src/helpers/*"],
       "@providers/*": ["./src/providers/*"],
-      "@types/*": ["./src/types/*"],
+      "@sharedTypes/*": ["./src/sharedTypes/*"],
       "@libs/*": ["./src/libs/*"]
     }
   }
