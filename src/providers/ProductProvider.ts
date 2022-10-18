@@ -1,5 +1,5 @@
 import { DynamoDB } from 'aws-sdk';
-import { Product } from '@types/product';
+import { Product } from '@sharedTypes/product';
 
 class ProductProvider {
   constructor(private readonly db: DynamoDB.DocumentClient, private readonly table: string) {
